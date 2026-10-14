@@ -16,7 +16,11 @@ public class sisVentaC {
     // Nota: Para evitar errores de logica se opto por usar operaciones dentro de variables
     
     /** Nota: 
-     * 
+     * En algunos casos donde se deben de imprimir tanto valores como textos en pantalla 
+     * se optó por eliminar elementos decorativos ( || ) para evitar que se descentralicen con 
+     * los demas caracteres cuando se necesite colocar cantidades numericas o nombres de productos 
+     * que excedan los tamaños de margenes. Priorizando las correcciones de errores a temas de logica 
+     * en lugar de margenes desalineados.
      */
     
     //contadores y acumuladores generales 
@@ -39,22 +43,31 @@ public class sisVentaC {
 
     // Bucle principal del menu
     do {
-        System.out.println("SISTEMA DE VENTAS\n");
-        System.out.println("Menu Principal\n");
-        System.out.println("Por favor seleccione una opcion\n");
-        System.out.println("Opcion 1: Registrar una venta");
-        System.out.println("Opcion 2: Consultar caja");
-        System.out.println("Opcion 3: Mostrar estadisticas");
-        System.out.println("Opcion 4: Salir");
-        System.out.print("Seleccione una opcion: ");
-
-        // Nota2: la funcion "sc.hasnext" comprueba si un numero NO es entero
+        System.out.println("         <SISTEMA DE VENTAS>      \n");
+        System.out.println("|====================================|");
+        System.out.println("|          MENU PRINCIPAL            |");
+        System.out.println("|====================================|");
+        System.out.println("|                                    |");
+        System.out.println("|  Por favor seleccione una opcion   |");
+        System.out.println("| Opcion 1: Registrar una venta      |");
+        System.out.println("| Opcion 2: Consultar caja           |");
+        System.out.println("| Opcion 3: Mostrar estadisticas     |");
+        System.out.println("| Opcion 4: Salir                    |");
+        System.out.println("|====================================|");
+        System.out.print("Escriba aqui su opcion:");
+        
+        // Nota: la funcion "sc.hasnext" comprueba si un numero NO es entero
         while (!sc.hasNextInt()) {
             System.out.print("""
-                             Opcion invalida !!!
-                             Por favor ingrese un numero del 1 al 4: """);
+                             |====================================|
+                             | Opcion invalida !!!                |           
+                             | Por favor ingrese un numero        |
+                             | del 1 al 4.                        |
+                             |====================================|
+                             """);
+            System.out.print("Escriba aqui su opcion:");
             sc.next();
-        } // Nota1: los booleanos se almacenas en condiciones do. (tener precaucion).
+        } // Nota: los booleanos se almacenas en condiciones do. (tener precaucion).
 
         opMenu = sc.nextInt();
 
@@ -63,14 +76,18 @@ public class sisVentaC {
         switch (opMenu) {
 
             case 1:
-                System.out.println("REGISTRAR UNA VENTA\n");
-                System.out.print("Cuantos productos tendra en la compra?: ");
+                System.out.println("|====================================|");
+                System.out.println("|       REGISTRAR UNA VENTA          |");
+                System.out.println("|====================================|\n");
+                System.out.println("Cuantos productos tendra en la compra?: ");
                 int cantP = sc.nextInt();
 
                 // Validar cantidad de productos
                 while (cantP <= 0) {
-                    System.out.print("Error. La cantidad debe ser mayor a 0. "
-                            + "Por favor, intente nuevamente: ");
+                    System.out.println("|====================================|");
+                    System.out.println("|Error. La cantidad debe ser mayor a 0. ");
+                    System.out.println("|====================================|");
+                    System.out.println("Por favor, intente nuevamente: ");
                     cantP = sc.nextInt();
                 }
 
@@ -101,8 +118,10 @@ public class sisVentaC {
 
                     //while para almacenar el precio del producto 
                     while (precio <= 0) {
-                        System.out.print("El precio debe ser mayor a 0. "
-                                + "Por favor, intente de nuevo: ");
+                        System.out.println("|====================================|");
+                        System.out.println("| El precio debe ser mayor a 0.      |");
+                        System.out.println("|====================================|");
+                        System.out.println("Por favor, intente de nuevo:");
                         precio = sc.nextDouble();
                     }
 
@@ -111,8 +130,10 @@ public class sisVentaC {
 
                     //while para la cantidad de cada producto
                     while (cantidad <= 0) {
-                        System.out.print("La cantidad debe ser mayor a 0. "
-                                + "Por favor, intente nuevamente: ");
+                        System.out.println("|====================================|");
+                        System.out.println("| La cantidad debe ser mayor a 0.    |");
+                        System.out.println("|====================================|");
+                        System.out.println("Por favor. Intente nuevamente: ");
                         cantidad = sc.nextInt();
                     }
 
@@ -145,17 +166,21 @@ public class sisVentaC {
 
                 // Formas de pago
                 // Bucle para presentar como se tendra que operar con el switch 
-                System.out.println("Forma de pago:\n");
-                System.out.println("1 - Efectivo");
-                System.out.println("2 - Tarjeta");
-                System.out.println("3 - Transferencia");
+                System.out.println("|====================================|");
+                System.out.println("| Forma de pago:\n                   |");
+                System.out.println("| 1 - Efectivo                       |");
+                System.out.println("| 2 - Tarjeta                        |");
+                System.out.println("| 3 - Transferencia                  |");
+                System.out.println("|====================================|");
                 System.out.print("Seleccione una opcion de pago: ");
 
                 int formaPago = sc.nextInt();
 
                 while (formaPago < 1 || formaPago > 3) {
-                    System.out.print("Opcion de pago invalida. "
-                            + "Seleccione los numeros 1, 2 o 3: ");
+                    System.out.println("|====================================|");
+                    System.out.println("| Opcion de pago invalida.           |");
+                    System.out.println("|====================================|");
+                    System.out.println("Seleccione los numeros 1, 2 o 3: ");
                     formaPago = sc.nextInt();
                 }
 
@@ -168,13 +193,18 @@ public class sisVentaC {
 
                     case 1:
                         // Pago en efectivo
-                        System.out.print("Ingrese el monto en efectivo recibido (Q): ");
+                        System.out.println("|====================================|");
+                        System.out.println("| Ingrese el monto en efectivo       |");
+                        System.out.println("| recibido Q: ");
+                        System.out.println("|====================================|");
                         efectivoRecibido = sc.nextDouble();
 
                         while (efectivoRecibido < totalPagar) {
+                            System.out.println("|====================================|");
                             System.out.print("Efectivo insuficiente. "
                                     + "El total es Q" + totalPagar
                                     + ". Ingrese un monto valido: ");
+                            System.out.println("|====================================|");
                             efectivoRecibido = sc.nextDouble();
                         }
 
@@ -219,6 +249,7 @@ public class sisVentaC {
 
                 // Resumen de la venta
                 // Imprimir los datos para consultas
+                System.out.println("|====================================|");
                 System.out.println("\nRESUMEN DE LA VENTA\n");
                 System.out.println("Cantidad de productos: " + productosDeV);
                 System.out.println("Subtotal: Q" + subtotalV);
@@ -227,60 +258,83 @@ public class sisVentaC {
                         + "%): Q" + montoDescuento);
                 System.out.println("IVA (12%): Q" + iva);
                 System.out.println("TOTAL A PAGAR: Q" + totalPagar);
+                System.out.println("|====================================|");
 
                 if (formaPago == 1) {
+                    System.out.println("|====================================|");
                     System.out.println("Forma de pago: Efectivo");
                     System.out.println("Efectivo recibido: Q" + efectivoRecibido);
                     System.out.println("Cambio: Q" + cambio);
+                    System.out.println("|====================================|");
                 } else if (formaPago == 2) {
+                    System.out.println("|====================================|");
                     System.out.println("Forma de pago: Tarjeta");
+                    System.out.println("|====================================|");
                 } else {
+                    System.out.println("|====================================|");
                     System.out.println("Forma de pago: Transferencia");
+                    System.out.println("|====================================|");
                 }
 
                 break;
 
             case 2:
+                System.out.println("|====================================|");
                 System.out.println("CONSULTAR CAJA\n");
+                System.out.println("|====================================|");
 
                 if (totalV == 0) {
+                    System.out.println("|====================================|");
                     System.out.println("No existen ventas registradas.");
+                    System.out.println("|====================================|");
+                    
                 } else {
+                    System.out.println("|====================================|");
                     System.out.println("Ventas realizadas: " + totalV);
                     System.out.println("Productos vendidos: " + totalP);
                     System.out.println("Total vendido en caja: Q" + dineroTv);
                     System.out.println("Ventas en efectivo: Q" + vEfectivoT);
                     System.out.println("Ventas con tarjeta: Q" + vTarjetaT);
                     System.out.println("Ventas por transferencia: Q" + vTransferenciaT);
+                    System.out.println("|====================================|");
                 }
 
                 break;
 
             case 3:
+                System.out.println("|====================================|");
                 System.out.println("ESTADISTICAS\n");
+                System.out.println("|====================================|");
 
                 if (totalV == 0) {
+                    System.out.println("|====================================|");
                     System.out.println("No existen ventas registradas.");
+                    System.out.println("|====================================|");
+                    
                 } else {
                     double promedioVenta = dineroTv / totalV;
 
+                    System.out.println("|====================================|");
                     System.out.println("Numero total de ventas: " + totalV);
                     System.out.println("Cantidad total de productos vendidos: " + totalP);
                     System.out.println("Total de dinero vendido: Q" + dineroTv);
                     System.out.println("Promedio de dinero por venta: Q" + promedioVenta);
                     System.out.println("Venta de mayor valor: Q" + ventaMax);
                     System.out.println("Venta de menor valor: Q" + ventaMin);
+                    System.out.println("|====================================|");
                 }
 
                 break;
 
             case 4:
                 //Solo mostrar el resultado finaliza el proceso 
+                System.out.println("---------------------------------------");
                 System.out.println("Saliendo del sistema. !Vuelva pronto!\n");
                 break;
 
             default:
                 // Para opciones no validas
+                System.out.println("---------------------------------------");
                 System.out.println("Opcion no valida. Intente de nuevo.\n");
         }
 
