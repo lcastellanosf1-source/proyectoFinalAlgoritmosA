@@ -26,6 +26,7 @@ public class sisVentaC {
     //contadores y acumuladores generales 
     int totalV = 0;
     int totalP = 0;
+    int ventasMayores500 = 0;
     double dineroTv = 0.0;
 
     // Variables para metodos de pago
@@ -47,7 +48,6 @@ public class sisVentaC {
         System.out.println("|====================================|");
         System.out.println("|          MENU PRINCIPAL            |");
         System.out.println("|====================================|");
-        System.out.println("|                                    |");
         System.out.println("|  Por favor seleccione una opcion   |");
         System.out.println("| Opcion 1: Registrar una venta      |");
         System.out.println("| Opcion 2: Consultar caja           |");
@@ -85,7 +85,7 @@ public class sisVentaC {
                 // Validar cantidad de productos
                 while (cantP <= 0) {
                     System.out.println("|====================================|");
-                    System.out.println("|Error. La cantidad debe ser mayor a 0. ");
+                    System.out.println("|Error. El valor no es mayor a 0     |");
                     System.out.println("|====================================|");
                     System.out.println("Por favor, intente nuevamente: ");
                     cantP = sc.nextInt();
@@ -167,7 +167,7 @@ public class sisVentaC {
                 // Formas de pago
                 // Bucle para presentar como se tendra que operar con el switch 
                 System.out.println("|====================================|");
-                System.out.println("| Forma de pago:\n                   |");
+                System.out.println("| Forma de pago:                     |");
                 System.out.println("| 1 - Efectivo                       |");
                 System.out.println("| 2 - Tarjeta                        |");
                 System.out.println("| 3 - Transferencia                  |");
@@ -201,10 +201,9 @@ public class sisVentaC {
 
                         while (efectivoRecibido < totalPagar) {
                             System.out.println("|====================================|");
-                            System.out.print("Efectivo insuficiente. "
-                                    + "El total es Q" + totalPagar
-                                    + ". Ingrese un monto valido: ");
-                            System.out.println("|====================================|");
+                            System.out.println("| Efectivo insuficiente              |");
+                            System.out.println(" El total es Q" + totalPagar);
+                            System.out.println(" Ingrese un monto valido: ");
                             efectivoRecibido = sc.nextDouble();
                         }
 
@@ -230,6 +229,10 @@ public class sisVentaC {
                 totalP += productosDeV;
                 dineroTv += totalPagar;
 
+                //condición especial para la defensa
+                if (totalPagar > 500) {
+                ventasMayores500++;
+}
                 // Determinar venta mayor y menor
                 // Evita que la venta mayor sea 0
                 // La 
@@ -250,7 +253,8 @@ public class sisVentaC {
                 // Resumen de la venta
                 // Imprimir los datos para consultas
                 System.out.println("|====================================|");
-                System.out.println("\nRESUMEN DE LA VENTA\n");
+                System.out.println("|       RESUMEN DE LA VENTA          |");
+                System.out.println("|====================================|");
                 System.out.println("Cantidad de productos: " + productosDeV);
                 System.out.println("Subtotal: Q" + subtotalV);
                 System.out.println("Descuento aplicado ("
@@ -269,10 +273,16 @@ public class sisVentaC {
                 } else if (formaPago == 2) {
                     System.out.println("|====================================|");
                     System.out.println("Forma de pago: Tarjeta");
+                    System.out.println("Monto a pagar con tarjeta: Q" + totalPagar);
+                    System.out.println("Pago con tarjeta registrado.");
+                    vTarjetaT += totalPagar;
                     System.out.println("|====================================|");
                 } else {
                     System.out.println("|====================================|");
                     System.out.println("Forma de pago: Transferencia");
+                    System.out.println("Monto a transferir: Q" + totalPagar);
+                    System.out.println("Transferencia registrada.");
+                    vTransferenciaT += totalPagar;
                     System.out.println("|====================================|");
                 }
 
@@ -280,12 +290,12 @@ public class sisVentaC {
 
             case 2:
                 System.out.println("|====================================|");
-                System.out.println("CONSULTAR CAJA\n");
+                System.out.println("|           CONSULTAR CAJA           |");
                 System.out.println("|====================================|");
 
                 if (totalV == 0) {
                     System.out.println("|====================================|");
-                    System.out.println("No existen ventas registradas.");
+                    System.out.println("|   No existen ventas registradas.   |");
                     System.out.println("|====================================|");
                     
                 } else {
@@ -303,12 +313,12 @@ public class sisVentaC {
 
             case 3:
                 System.out.println("|====================================|");
-                System.out.println("ESTADISTICAS\n");
+                System.out.println("|             ESTADISTICAS           |");
                 System.out.println("|====================================|");
 
                 if (totalV == 0) {
                     System.out.println("|====================================|");
-                    System.out.println("No existen ventas registradas.");
+                    System.out.println("|    No existen ventas registradas.  |");
                     System.out.println("|====================================|");
                     
                 } else {
@@ -318,6 +328,7 @@ public class sisVentaC {
                     System.out.println("Numero total de ventas: " + totalV);
                     System.out.println("Cantidad total de productos vendidos: " + totalP);
                     System.out.println("Total de dinero vendido: Q" + dineroTv);
+                    System.out.println("Ventas mayores a Q500: " + ventasMayores500);
                     System.out.println("Promedio de dinero por venta: Q" + promedioVenta);
                     System.out.println("Venta de mayor valor: Q" + ventaMax);
                     System.out.println("Venta de menor valor: Q" + ventaMin);
@@ -329,13 +340,15 @@ public class sisVentaC {
             case 4:
                 //Solo mostrar el resultado finaliza el proceso 
                 System.out.println("---------------------------------------");
-                System.out.println("Saliendo del sistema. !Vuelva pronto!\n");
+                System.out.println("Saliendo del sistema. !Vuelva pronto!  ");
+                System.out.println("---------------------------------------");
                 break;
 
             default:
                 // Para opciones no validas
                 System.out.println("---------------------------------------");
-                System.out.println("Opcion no valida. Intente de nuevo.\n");
+                System.out.println("Opcion no valida. Intente de nuevo.    ");
+                System.out.println("---------------------------------------");
         }
 
     } while (opMenu != 4);
