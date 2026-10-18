@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package sbv;
-
 import static sbv.sisVentaC.sisVentaBasico;
 /**
  *
@@ -19,5 +18,4 @@ public class sisVentaM {
         
         sisVentaBasico();
     }
-    
 }
